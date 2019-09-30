@@ -1,0 +1,170 @@
+@font-face {
+    font-family: 'Raleway-Light';
+    src: url(../../assets/fonts/Raleway-Light.ttf);
+}
+
+@font-face {
+    font-family: 'Raleway-Medium';
+    src: url(../../assets/fonts/Raleway-Medium.ttf);
+}
+
+@font-face {
+    font-family: 'Allagia-Demo';
+    src: url(../../assets/fonts/Allagia-Demo.ttf);
+}
+
+.PanelCard {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .14);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card-body {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card-title {
+    margin-bottom: 36px !important;
+    font-family: 'Raleway-Medium';
+    font-size: 22px;
+    color: rgb(77, 77, 77);
+}
+
+/* .UnderTitle {
+    margin-bottom: 30px !important;
+    font-weight: 400;
+    color: rgb(161, 161, 161);
+    font-size: 16px;
+    font-family: 'Raleway-Light';
+} */
+
+.Panelinput,.dropdown {
+    margin-bottom: 16px !important;
+    font-family: 'Raleway-Light';
+    font-size: 16px !important;
+}
+.dropdown-toggle{
+    width: 100%;
+    border-radius: 100px;
+}
+.dropdown-menu{
+    width:100%;
+}
+.TeamForgotPassword{
+    font-size: 14px;
+    color: rgb(126, 126, 126);
+    text-decoration: none;
+    margin-top:15px;
+}
+/* .bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background-image: url(../../assets/images/bg.jpg);
+    background-position: left bottom;
+    background-size: 980px 750px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+} */
+
+.Panelinput {
+    border-radius: 100px !important;
+    padding-left: 18px !important;
+    border-color: rgb(136, 191, 241) !important;
+}
+
+.Panelbutton {
+    border-radius: 100px !important;
+    font-family: 'Raleway-Light';
+}
+
+.alert {
+    padding: 12px !important;
+}
+
+.btn-primary {
+    background-color: #ed7537;
+    border-color: #ed7537;
+}
+
+.btn-primary:hover {
+    background-color: #ff9849;
+    border-color: #ed7537;
+}
+
+#root>div>form>center>div>div>div.fade.alert.alert-success.alert-dismissible.show>p {
+    margin: 0px !important;
+}
+
+.close {
+    outline: none !important;
+}
+/* 
+.NextPanel {
+    margin-top: 8px;
+} */
+
+@media screen and (max-width: 768px) {
+    .bg {
+        background-image: none;
+        background-color: #ffffff;
+        background-image: linear-gradient(180deg, #ffffff 88%, #848484 100%);
+    }
+    .PanelCard {
+        outline: none;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+    }
+}
+/* .fa-facebook-f,.fa-google{
+    padding-right:12px;
+} */
+/* .fa-google{
+    padding-right: 25px;
+} */
+/* .FbBtn{
+    border:none !important;
+    background-color: #3b5998;
+    padding: 8px;
+    border-radius: 100px !important;
+    margin: 6px;
+    font-size: 12px;
+    font-weight: 400;
+}
+.GmailBtn{
+    border: none !important;
+    background-color: #D44638;
+    padding: 8px;
+    border-radius: 100px !important;
+    margin: 6px;
+    font-size: 12px;
+    font-weight: 400;
+}
+.FbBtn:hover{
+    background-color: #6079af;
+}
+.GmailBtn:hover{
+    background-color: rgb(218, 110, 100);
+}
+.SocailRegisterPanel{
+    background-color: transparent;
+    border :none !important;
+    outline: none !important;
+    font-family: 'Raleway-Light';
+    position: fixed;
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%, -98%);
+} */

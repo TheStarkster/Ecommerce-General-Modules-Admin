@@ -1,0 +1,12 @@
+.AddtbRoot{
+    position: relative;
+    background-color: transparent;
+    width:100%;
+}
+.w-full{
+    width: inherit !important;
+    height: 100% !important;
+}
+.MuiPopover-paper{
+    width:10% !important;
+}

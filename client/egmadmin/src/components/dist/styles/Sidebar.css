@@ -1,0 +1,157 @@
+@font-face{
+    font-family: 'Raleway-Light';
+    src: url('../../assets/fonts/Raleway-Light.ttf')
+}
+.SideBarRoot{
+    position: relative;
+    z-index: 999999;
+    background-color: #5c5858;
+    width: 26%;
+    height: 100%;
+    transition: 0.4s;
+}
+.Collapse{
+    transform: translateX(-100%);
+}
+.fa-arrow-right{
+    padding: 8px;
+}
+.SidePanelOpenBtn{
+    z-index: 99999;
+    cursor: pointer;
+    padding:8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #555555;
+    position: absolute;
+    border-radius: 100px;
+    color: white;
+    font-size: 18px;
+    margin: 15px;
+    margin-left: 54px;
+    transition: 0.3s;
+    left:0;
+}
+.MenuBtn{
+    opacity: 0;
+    width: 0;
+    transition: 0.4s;
+}
+.SidePanelOpenBtn:hover > .MenuBtn{
+    opacity: 1;
+    width: 50px;
+    padding-left: 5px;
+}
+
+.CloseBtn{
+    top:0;
+    left:0;
+    width:100%;
+    height:90px;
+    background-color: transparent;
+    position: absolute;
+}
+#root > div > div > ul{
+    list-style-type: none;
+    padding: 12px;
+}
+#root > div > div > ul > li{
+    padding: 12px;
+    transition: 0.1s;
+    cursor: pointer;
+}
+#root > div > div > ul > li:hover{
+    background-color: rgb(179, 179, 179);
+}
+#root > div > div > ul > li > img{
+    margin-right: 24px;
+}
+.UserCard{
+    height: 20%;
+    width:100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    margin-top:15px;
+}
+.UserAvatar{
+    width: 120px;
+    height: 120px;
+    background-color: transparent;
+}
+.UserAvatar > img{
+    width: inherit;
+    height: inherit;
+}
+.UserDetailCard{
+    background-color: transparent;
+    font-family: 'Raleway-Light';
+    color: rgb(221, 221, 221);
+    margin-left:8px;
+}
+.UserName{
+    font-size: 22px;
+}
+.ExpandedProductOptions{
+    list-style-type: none;
+    padding: 0px !important;
+}
+.ExpandedProductOptions > li{
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    width:100%;
+}
+.ExpandedProductOptions > li:hover{
+    background-color: #d3d3d3;
+}
+.ExpandedProductOptions > li > img{
+    margin-right: 18px;
+    margin-left:12px;
+}
+
+.Close{
+    font-size: 16px !important;
+    font-weight: lighter !important;
+}
+.pad-x{
+    padding: 12px;
+}
+.fa-times{
+    cursor: pointer;
+    padding:10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #969696;
+    position: absolute;
+    border-radius: 100px;
+    color: white;
+    font-size: 18px;
+    margin: 8px;
+    transition: 0.4s;
+    right:0;
+}
+.fa-times:after {
+    color: rgb(209, 209, 209);
+    content: 'Close';
+    font-weight: lighter;
+    font-size: 16px;
+    display: block;
+    float: right;
+    opacity: 0;
+    overflow: hidden;
+    width: 0;
+    transition: 0.4s;
+}
+.fa-times:hover {
+    background: rgba(255,255,255,.2);
+}
+.fa-times:hover:after {
+    opacity: 1;
+    width: 50px;
+    margin-left:8px;
+}

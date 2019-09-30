@@ -1,0 +1,17 @@
+.MuiExpansionPanelDetails-root{
+    padding:12px !important;
+}
+.save-changes{
+    z-index: 999999;
+    position: fixed;
+    right:20px;
+    bottom:30px;
+    box-shadow:0 10px 15px 0px rgba(85, 10, 216, 0.527);
+    background-color: #673ab7;
+    border-color: #3c1285;
+    padding: 15px;
+}
+.save-changes:hover{
+    background-color: #875ad6;
+    border-color: #3c1285;
+}
