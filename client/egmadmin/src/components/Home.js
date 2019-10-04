@@ -97,9 +97,9 @@ class Home extends Component {
     }
     FullEdit(e) {
         this.FullUpdateRowData.data.push(e)
-        if(e._id !== undefined || e._id !== null){
-            Array.prototype.push.apply(this.KeyFeatureArr,e.KeyFeatures)
-            Array.prototype.push.apply(this.PrimaryFeatureArr,e.PrimaryFeatures)
+        if (e._id !== undefined || e._id !== null) {
+            Array.prototype.push.apply(this.KeyFeatureArr, e.KeyFeatures)
+            Array.prototype.push.apply(this.PrimaryFeatureArr, e.PrimaryFeatures)
             console.log(e._id)
             console.log(e)
             console.log(this.KeyFeatureArr)
@@ -137,14 +137,9 @@ class Home extends Component {
         axios.post('http://18.212.139.83:2020/product/admin-add-product-single', e).then(response => {
         }).then(alert("data Saved"))
     }
-    PushUpdatedTableData(oldDataID, newData) {
-        var temp = [oldDataID, newData]
-        this.UpdateData.newData.push(temp)
-        if (this.UpdateData.newData.length === 1) {
-            axios.post('http://18.212.139.83:2020/product/admin-update-product-single', this.UpdateData).then(response => {
-                this.UpdateData.newData = []
-            })
-        }
+    PushUpdatedTableData(newData) {
+        axios.post('http://18.212.139.83:2020/product/admin-update-product-single', newData).then(response => {
+        })
     }
     DeleteTableData() {
         if (this.DeletedData.Delete.length === 1) {
@@ -160,7 +155,7 @@ class Home extends Component {
             axios.post('http://18.212.139.83:2020/product/admin-add-product-single', this.AddData).then(response => {
             })
         } else if (this.AddData.AddData.length > 1) {
-            axios.post('http://localhost:2020/product/admin-add-product-multiple', this.AddData).then(response => {
+            axios.post('http://18.212.139.83:2020/product/admin-add-product-multiple', this.AddData).then(response => {
             })
         }
     }
@@ -663,7 +658,7 @@ function MaterialTableCustom(props) {
                                 resolve();
                                 const data = [...state.data];
                                 data[data.indexOf(oldData)] = newData;
-                                props.triggerUpdatedData(oldData._id, newData)
+                                props.triggerUpdatedData(newData)
                                 setState({ ...state, data });
                             }, 600);
                         }),
