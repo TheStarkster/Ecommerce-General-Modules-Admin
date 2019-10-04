@@ -134,30 +134,30 @@ class Home extends Component {
             tableData: tempTableData
         })
         console.log(this.state.tableData)
-        axios.post('http://localhost:2020/product/admin-add-product-single', e).then(response => {
+        axios.post('http://18.212.139.83:2020/product/admin-add-product-single', e).then(response => {
         }).then(alert("data Saved"))
     }
     PushUpdatedTableData(oldDataID, newData) {
         var temp = [oldDataID, newData]
         this.UpdateData.newData.push(temp)
         if (this.UpdateData.newData.length === 1) {
-            axios.post('http://localhost:2020/product/admin-update-product-single', this.UpdateData).then(response => {
+            axios.post('http://18.212.139.83:2020/product/admin-update-product-single', this.UpdateData).then(response => {
                 this.UpdateData.newData = []
             })
         }
     }
     DeleteTableData() {
         if (this.DeletedData.Delete.length === 1) {
-            axios.post('http://localhost:2020/product/admin-delete-product-single', this.DeletedData).then(response => {
+            axios.post('http://18.212.139.83:2020/product/admin-delete-product-single', this.DeletedData).then(response => {
             })
         } else if (this.DeletedData.Delete.length > 1) {
-            axios.post('http://localhost:2020/product/admin-delete-product-multiple', this.DeletedData).then(response => {
+            axios.post('http://18.212.139.83:2020/product/admin-delete-product-multiple', this.DeletedData).then(response => {
             })
         }
     }
     AddedTableData() {
         if (this.state.tableData.length === 1) {
-            axios.post('http://localhost:2020/product/admin-add-product-single', this.AddData).then(response => {
+            axios.post('http://18.212.139.83:2020/product/admin-add-product-single', this.AddData).then(response => {
             })
         } else if (this.AddData.AddData.length > 1) {
             axios.post('http://localhost:2020/product/admin-add-product-multiple', this.AddData).then(response => {
@@ -177,7 +177,7 @@ class Home extends Component {
     // }
 
     RenderAllProductPanel() {
-        axios.get('http://localhost:2020/product/admin-fetch-product').then(response => {
+        axios.get('http://18.212.139.83:2020/product/admin-fetch-product').then(response => {
             this.setState({
                 AllProduct_Panel: true,
                 tableData: [...response.data]
@@ -385,11 +385,11 @@ class Home extends Component {
             tableData: tempTableData
         })
         if (this.v_temp[0]._id !== undefined || this.v_temp[0]._id !== null) {
-            axios.post('http://localhost:2020/product/admin-update-product-single', this.v_temp[0]).then(response => {
+            axios.post('http://18.212.139.83:2020/product/admin-update-product-single', this.v_temp[0]).then(response => {
                 this.UpdateData.newData = []
             })
         } else {
-            axios.post('http://localhost:2020/product/admin-add-product-single', this.v_temp[0]).then(response => {
+            axios.post('http://18.212.139.83:2020/product/admin-add-product-single', this.v_temp[0]).then(response => {
             }).then(alert("data Saved"))
         }
 
