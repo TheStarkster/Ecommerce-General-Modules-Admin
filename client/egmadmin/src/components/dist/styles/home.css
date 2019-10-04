@@ -6,3 +6,138 @@
     height: 100%;
     display:flex;
 }
+.Primary-Feature-Btn>button{
+    background-color: rgb(22, 173, 219);
+    border:none;
+    padding: 8px;
+    margin: 4px;
+    margin-top: 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    outline: none;
+    width: 100%;
+}
+.Primary-Feature-Btn>button:focus{
+    background-color: rgb(15, 134, 170);
+}
+.Primary-Feature-Btn>button:hover{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4)
+}
+.Key-Feature-Btn>button{
+    background-color: rgb(233, 144, 61);
+    border:none;
+    padding: 8px;
+    margin: 4px;
+    margin-top: 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    outline: none;
+    width: 100%;
+}
+.Key-Feature-Btn-Save>button{
+    background-color: rgb(61, 141, 233);
+    border:none;
+    padding: 8px;
+    margin: 4px;
+    margin-top: 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    outline: none;
+    width: 100%;
+}
+.Key-Feature-Btn-Close>button{
+    background-color: rgb(233, 95, 61);
+    border:none;
+    padding: 8px;
+    margin: 4px;
+    margin-top: 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    outline: none;
+    width: 100%;
+}
+#Key-Feature-Col>input{
+    margin: 5px;
+}
+.Add-New-Row>button{
+    background-color: rgb(5, 197, 14);
+    border:none;
+    padding: 8px;
+    margin: 4px;
+    color: white; 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    outline: none;
+    width: 100%;
+}
+.NewRowCancelationBtn{
+    background-color: rgb(233, 87, 61) !important;
+}
+.FeatureTag{
+    margin-top: 5px;
+    margin-bottom: 0px;
+    color: white;
+}
+#CreateNewProductBtn{
+    background-color:rgb(28, 190, 22) !important
+}
+#CreateNewProductBtn:disabled{
+    opacity: 0.6;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+#SaveModalBtn:disabled{
+    opacity: 0.6;
+    background-color: rgb(28, 190, 22) !important;
+}
+#SaveModalBtn:disabled::after{
+    content: ' - OK';
+}
+#SaveModalBtn:disabled:hover{
+    box-shadow: none;
+    cursor: not-allowed;
+}
+.Key-Feature-Btn>button:focus{
+    background-color: rgb(204, 123, 46);
+}
+.Key-Feature-Btn>button:hover{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4)
+}
+
+.FullUpdateRowModal{
+    position: fixed;
+    overflow-y: auto;
+    top:20%;
+    left:50%;
+    width:50%;
+    border-radius: 5px;
+    z-index:999;
+    background-color: rgb(141, 141, 141);
+    transform: translate(-50%,-20%);
+    box-shadow: 0 0 60px rgba(0,0,0,0.2);
+}
+.Background-Modal{
+    position: fixed;
+    z-index: 9999999;
+    top:0;
+    width:100%;
+    height: 100%;
+    left:0;
+    background-color: rgba(146, 146, 146, 0.76);
+}
+.Full-edit-inputs{
+    padding:35px;
+}
+.Full-edit-inputs>input{
+    margin-top:15px;
+    padding:8px;
+}

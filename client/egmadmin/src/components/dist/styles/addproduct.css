@@ -10,3 +10,14 @@
 .MuiPopover-paper{
     width:10% !important;
 }
+td.MuiTableCell-body{
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.MuiTableCell-body {
+    width: 50px !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

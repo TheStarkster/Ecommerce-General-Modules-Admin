@@ -11,6 +11,10 @@
     border-color: #3c1285;
     padding: 15px;
 }
+.MuiTableCell-body{
+    padding-left: 2px !important;    
+    margin-left: 12px !important;
+}
 .save-changes:hover{
     background-color: #875ad6;
     border-color: #3c1285;
