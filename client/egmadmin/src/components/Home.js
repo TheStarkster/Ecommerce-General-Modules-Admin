@@ -122,8 +122,8 @@ class Home extends Component {
         })
     }
     PushDeletedTableData(e) {
-        this.DeletedData.Delete.push(e)
-        this.Operations.DeleteOperation = true
+        axios.post('http://localhost:2020/product/admin-delete-product-single', e).then(response => {
+        })
     }
     PushAddedTableData(e) {
         e.tempID = this.tempID
@@ -135,21 +135,20 @@ class Home extends Component {
         })
         console.log(this.state.tableData)
         axios.post('http://18.212.139.83:2020/product/admin-add-product-single', e).then(response => {
-        }).then(alert("data Saved"))
+        })
     }
     PushUpdatedTableData(newData) {
         axios.post('http://18.212.139.83:2020/product/admin-update-product-single', newData).then(response => {
         })
     }
-    DeleteTableData() {
-        if (this.DeletedData.Delete.length === 1) {
-            axios.post('http://18.212.139.83:2020/product/admin-delete-product-single', this.DeletedData).then(response => {
-            })
-        } else if (this.DeletedData.Delete.length > 1) {
-            axios.post('http://18.212.139.83:2020/product/admin-delete-product-multiple', this.DeletedData).then(response => {
-            })
-        }
-    }
+    // DeleteTableData() {
+    //     if (this.DeletedData.Delete.length === 1) {
+
+    //     } else if (this.DeletedData.Delete.length > 1) {
+    //         axios.post('http://18.212.139.83:2020/product/admin-delete-product-multiple', this.DeletedData).then(response => {
+    //         })
+    //     }
+    // }
     AddedTableData() {
         if (this.state.tableData.length === 1) {
             axios.post('http://18.212.139.83:2020/product/admin-add-product-single', this.AddData).then(response => {
@@ -192,7 +191,7 @@ class Home extends Component {
             // this.UpdateTableData()
         }
         if (this.Operations.DeleteOperation === true) {
-            this.DeleteTableData()
+            // this.DeleteTableData()
             this.DeletedData = {
                 Delete: []
             }
@@ -235,7 +234,7 @@ class Home extends Component {
             rdl: document.getElementById('RDL').value,
             stock: document.getElementById('STK').value,
             tags: document.getElementById('TAGS').value,
-            CreatedBy:this.props.location.state.details.data.e_id
+            CreatedBy: this.props.location.state.details.data.e_id
         })
         this.setState({
             ShowMainUpdateInput: false,
@@ -262,7 +261,7 @@ class Home extends Component {
             rdl: document.getElementById('RDL').value,
             stock: document.getElementById('STK').value,
             tags: document.getElementById('TAGS').value,
-            CreatedBy:this.props.location.state.details.data.e_id
+            CreatedBy: this.props.location.state.details.data.e_id
         })
         this.setState({
             ShowMainUpdateInput: false,
@@ -381,16 +380,18 @@ class Home extends Component {
         this.setState({
             tableData: tempTableData
         })
-        if (this.v_temp[0]._id !== undefined || this.v_temp[0]._id !== null) {
+        if (this.v_temp[0]._id !== "") {
+            console.log('updating data')
+            console.log(this.v_temp[0])
             axios.post('http://18.212.139.83:2020/product/admin-update-product-single', this.v_temp[0]).then(response => {
                 this.UpdateData.newData = []
             })
         } else {
+            console.log('saving data')
             axios.post('http://18.212.139.83:2020/product/admin-add-product-single', this.v_temp[0]).then(response => {
             }).then(alert("data Saved"))
         }
 
-        console.log(this.NewProduct)
         this.v_temp = []
     }
     render() {
@@ -670,7 +671,7 @@ function MaterialTableCustom(props) {
                                 resolve();
                                 const data = [...state.data];
                                 var DeletedData = data.splice(data.indexOf(oldData), 1);
-                                props.triggerDeletedData(DeletedData[0]._id)
+                                props.triggerDeletedData(DeletedData[0])
                                 setState({ ...state, data });
                             }, 600);
                         }),
