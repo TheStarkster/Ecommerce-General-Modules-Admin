@@ -235,6 +235,7 @@ class Home extends Component {
             rdl: document.getElementById('RDL').value,
             stock: document.getElementById('STK').value,
             tags: document.getElementById('TAGS').value,
+            CreatedBy:this.props.location.state.details.data.e_id
         })
         this.setState({
             ShowMainUpdateInput: false,
@@ -261,6 +262,7 @@ class Home extends Component {
             rdl: document.getElementById('RDL').value,
             stock: document.getElementById('STK').value,
             tags: document.getElementById('TAGS').value,
+            CreatedBy:this.props.location.state.details.data.e_id
         })
         this.setState({
             ShowMainUpdateInput: false,
@@ -528,10 +530,10 @@ class Home extends Component {
                         </div>
                         <div className="UserDetailCard">
                             <div className="UserName">
-                                Employee Name
-                        </div>
+                                {this.props.location.state.details.data.name}
+                            </div>
                             <div>
-                                Position
+                                {this.props.location.state.details.data.role}
                             </div>
                         </div>
                     </div>
