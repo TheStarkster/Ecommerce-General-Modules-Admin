@@ -17,7 +17,7 @@ class LoginPanel extends Component {
 
     SubmitHandler = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:2020/user/login", {
+        axios.post("http://18.212.139.83:2020/user/login", {
             email: this.state.email,
             pass: this.state.pass,
             role: this.state.DropDownTitle
@@ -52,8 +52,8 @@ class LoginPanel extends Component {
                                 <Dropdown>
                                     <DropdownButton title={this.state.DropDownTitle}>
                                         <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Super-Admin" })}>Super-Admin</DropdownItem>
-                                        <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Admin" })}>Admin</DropdownItem>
-                                        <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Executive" })}>Executive</DropdownItem>
+                                        {/* <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Admin" })}>Admin</DropdownItem> */}
+                                        {/* <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Executive" })}>Executive</DropdownItem> */}
                                         <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Developer" })}>Developer</DropdownItem>
                                     </DropdownButton>
                                 </Dropdown>

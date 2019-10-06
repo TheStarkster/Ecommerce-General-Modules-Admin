@@ -54,9 +54,9 @@ class Home extends Component {
         this.ProductFilledFromExisting = false
         this.NumberOfKeyFeatures = 1;
         this.NumberOfPrimaryFeatures = 1;
-        this.KeyFeatureArr = []
+        this.KeyFeatures = []
         this.v_temp = []
-        this.PrimaryFeatureArr = []
+        this.PrimaryFeatures = []
         this.RenderAllProductPanel = this.RenderAllProductPanel.bind(this)
         this.PushDeletedTableData = this.PushDeletedTableData.bind(this)
         this.PushUpdatedTableData = this.PushUpdatedTableData.bind(this)
@@ -98,8 +98,8 @@ class Home extends Component {
     FullEdit(e) {
         this.FullUpdateRowData.data.push(e)
         if (e._id !== undefined || e._id !== null) {
-            Array.prototype.push.apply(this.KeyFeatureArr, e.KeyFeatures)
-            Array.prototype.push.apply(this.PrimaryFeatureArr, e.PrimaryFeatures)
+            Array.prototype.push.apply(this.KeyFeatures, e.KeyFeatures)
+            Array.prototype.push.apply(this.PrimaryFeatures, e.PrimaryFeatures)
         }
         this.setState({
             Show_FullRowUpdateModal: true,
@@ -112,11 +112,15 @@ class Home extends Component {
             document.getElementById('URI').value = e.image
             document.getElementById('PRC').value = e.price
             document.getElementById('MRP').value = e.mrp
+            document.getElementById('BOP').value = e.brand
+            document.getElementById('WRTY').value = e.wrty
+            document.getElementById('RDL').value = e.rdl
+            document.getElementById('TAGS').value = e.tags
             document.getElementById('STK').value = e.stock
         })
     }
     PushDeletedTableData(e) {
-        axios.post('http://localhost:2020/product/admin-delete-product-single', e).then(response => {
+        axios.post('http://18.212.139.83:2020/product/admin-delete-product-single', e).then(response => {
         })
     }
     PushAddedTableData(e) {
@@ -131,8 +135,7 @@ class Home extends Component {
         })
     }
     PushUpdatedTableData(newData) {
-        console.log(newData)
-        axios.post('http://18.212.139.83:2020/product/admin-update-product-single', newData).then(response => {
+        axios.post('http://locahost:2020/product/admin-update-product-single', newData).then(response => {
         })
     }
     // DeleteTableData() {
@@ -165,7 +168,7 @@ class Home extends Component {
     // }
 
     RenderAllProductPanel() {
-        axios.get('http://18.212.139.83:2020/product/admin-fetch-product').then(response => {
+        axios.get('http://localhost:2020/product/admin-fetch-product').then(response => {
             this.setState({
                 AllProduct_Panel: true,
                 tableData: [...response.data]
@@ -220,6 +223,7 @@ class Home extends Component {
         this.v_temp = []
         this.v_temp.push({
             _id: document.getElementById('PID') !== null ? document.getElementById('PID').value : null,
+            tableID: document.getElementById('TableID').value,
             name: document.getElementById('PFN').value,
             brand: document.getElementById('BOP').value,
             wrty: document.getElementById('WRTY').value,
@@ -235,12 +239,12 @@ class Home extends Component {
             ShowMainUpdateInput: false,
             ShowKeyFeatureContent: true
         }, () => {
-            if (this.KeyFeatureArr.length != 0) {
+            if (this.KeyFeatures.length != 0) {
                 this.NumberOfKeyFeatures = 1
-                for (var i = 0; i < this.KeyFeatureArr.length - 1; i++) {
-                    this.AddNewRowForKeyFeatures(this.KeyFeatureArr[i + 1])
+                for (var i = 0; i < this.KeyFeatures.length - 1; i++) {
+                    this.AddNewRowForKeyFeatures(this.KeyFeatures[i + 1])
                 }
-                document.getElementById('KeyFeature-1').value = this.KeyFeatureArr[0]
+                document.getElementById('KeyFeature-1').value = this.KeyFeatures[0]
             }
         })
     }
@@ -249,6 +253,7 @@ class Home extends Component {
         this.v_temp.push({
             _id: document.getElementById('PID') !== null ? document.getElementById('PID').value : null,
             name: document.getElementById('PFN').value,
+            tableID: document.getElementById('TableID').value,
             brand: document.getElementById('BOP').value,
             wrty: document.getElementById('WRTY').value,
             image: document.getElementById('URI').value,
@@ -263,12 +268,12 @@ class Home extends Component {
             ShowMainUpdateInput: false,
             ShowPrimaryFeatureContent: true
         }, () => {
-            if (this.PrimaryFeatureArr.length != 0) {
+            if (this.PrimaryFeatures.length != 0) {
                 this.NumberOfPrimaryFeatures = 1
-                for (var i = 0; i < this.PrimaryFeatureArr.length - 1; i++) {
-                    this.AddNewRowForPrimaryFeatures(this.PrimaryFeatureArr[i + 1])
+                for (var i = 0; i < this.PrimaryFeatures.length - 1; i++) {
+                    this.AddNewRowForPrimaryFeatures(this.PrimaryFeatures[i + 1])
                 }
-                document.getElementById('PrimaryFeature-1').value = this.PrimaryFeatureArr[0]
+                document.getElementById('PrimaryFeature-1').value = this.PrimaryFeatures[0]
             }
         })
     }
@@ -307,22 +312,22 @@ class Home extends Component {
         document.getElementById("Key-Feature-Col-Cross").appendChild(NewRemoveBtn)
     }
     SaveKeyFeatures() {
-        if (this.KeyFeatureArr.length != 0) {
-            this.KeyFeatureArr = []
+        if (this.KeyFeatures.length != 0) {
+            this.KeyFeatures = []
         }
         for (var i = 0; i <= this.NumberOfKeyFeatures; i++) {
             if (document.getElementById("KeyFeature-" + i) != null) {
-                this.KeyFeatureArr.push(document.getElementById("KeyFeature-" + i).value)
+                this.KeyFeatures.push(document.getElementById("KeyFeature-" + i).value)
             }
         }
     }
     SavePrimaryFeatures() {
-        if (this.PrimaryFeatureArr.length != 0) {
-            this.PrimaryFeatureArr = []
+        if (this.PrimaryFeatures.length != 0) {
+            this.PrimaryFeatures = []
         }
         for (var i = 0; i <= this.NumberOfPrimaryFeatures; i++) {
             if (document.getElementById("PrimaryFeature-" + i) != null) {
-                this.PrimaryFeatureArr.push(document.getElementById("PrimaryFeature-" + i).value)
+                this.PrimaryFeatures.push(document.getElementById("PrimaryFeature-" + i).value)
             }
         }
     }
@@ -333,12 +338,14 @@ class Home extends Component {
             ShowMainUpdateInput: true
         }, () => {
             if (this.v_temp[0] != null) {
+                document.getElementById('TableID').value = this.v_temp[0].tableID
                 document.getElementById('PID').value = this.v_temp[0]._id
                 document.getElementById('PFN').value = this.v_temp[0].name
                 document.getElementById('BOP').value = this.v_temp[0].brand
                 document.getElementById('URI').value = this.v_temp[0].image
                 document.getElementById('PRC').value = this.v_temp[0].price
                 document.getElementById('MRP').value = this.v_temp[0].mrp
+                document.getElementById('WRTY').value = this.v_temp[0].wrty
                 document.getElementById('RDL').value = this.v_temp[0].rdl
                 document.getElementById('STK').value = this.v_temp[0].stock
                 document.getElementById('TAGS').value = this.v_temp[0].tags
@@ -354,9 +361,10 @@ class Home extends Component {
         document.getElementById('RDL').value = ""
         document.getElementById('STK').value = ""
         document.getElementById('TAGS').value = ""
+        document.getElementById('WRTY').value = ""
 
-        this.KeyFeatureArr = []
-        this.PrimaryFeatureArr = []
+        this.KeyFeatures = []
+        this.PrimaryFeatures = []
 
         this.setState({
             EnableSaveBtnInModal: true,
@@ -368,21 +376,41 @@ class Home extends Component {
             EnableSaveBtnInModal: false,
             EnableCreateNewBtnInModal: true
         })
-        this.v_temp[0].KeyFeatureArr = this.KeyFeatureArr
-        this.v_temp[0].PrimaryFeatureArr = this.PrimaryFeatureArr
-        this.NewProduct.push(this.v_temp[0])
-        var tempTableData = this.state.tableData
-        tempTableData.push(this.v_temp[0])
-        this.setState({
-            tableData: tempTableData
+        this.v_temp = []
+        this.v_temp.push({
+            _id: document.getElementById('PID') !== null ? document.getElementById('PID').value : null,
+            name: document.getElementById('PFN').value,
+            brand: document.getElementById('BOP').value,
+            wrty: document.getElementById('WRTY').value,
+            image: document.getElementById('URI').value,
+            price: document.getElementById('PRC').value,
+            mrp: document.getElementById('MRP').value,
+            rdl: document.getElementById('RDL').value,
+            stock: document.getElementById('STK').value,
+            tags: document.getElementById('TAGS').value,
+            tableID: document.getElementById('TableID').value,
+            CreatedBy: this.props.location.state.details.data.e_id
         })
+        this.v_temp[0].KeyFeatures = this.KeyFeatures
+        this.v_temp[0].PrimaryFeatures = this.PrimaryFeatures
+
+        var tempTableData = this.state.tableData
+        tempTableData.splice(this.v_temp[0].tableID, 1)
+        tempTableData.push(this.v_temp[0])
         if (this.v_temp[0]._id !== "") {
             axios.post('http://18.212.139.83:2020/product/admin-update-product-single', this.v_temp[0]).then(response => {
-                this.UpdateData.newData = []
+            }).then(() => {
+                this.setState({
+                    tableData: tempTableData
+                })
             })
         } else {
             axios.post('http://18.212.139.83:2020/product/admin-add-product-single', this.v_temp[0]).then(response => {
-            }).then(alert("data Saved"))
+            }).then(() => {
+                this.setState({
+                    tableData: tempTableData
+                })
+            })
         }
 
         this.v_temp = []
@@ -399,6 +427,7 @@ class Home extends Component {
                                         <div className="col-12 main-input-root">
                                             <div className="row">
                                                 <div className="col-6 Full-edit-inputs">
+                                                    <input type="hidden" className="form-control" id="TableID"></input>
                                                     <input type="hidden" className="form-control" id="PID"></input>
                                                     <input type="text" className="form-control" id="PFN" placeholder="Product Full Name"></input>
                                                     <input type="text" className="form-control" id="URI" placeholder="Image Uri"></input>
@@ -432,7 +461,7 @@ class Home extends Component {
                                                                 </div>
                                                         }
                                                         <div className="Key-Feature-Btn col-6 d-flex justify-content-center align-items-center flex-column">
-                                                            <button onClick={() => { this.setState({ Show_FullRowUpdateModal: false, ShowMainUpdateInput: false }); this.KeyFeatureArr = []; this.PrimaryFeatureArr = [] }}>Close</button>
+                                                            <button onClick={() => { this.setState({ Show_FullRowUpdateModal: false, ShowMainUpdateInput: false }); this.KeyFeatures = []; this.PrimaryFeatures = [] }}>Close</button>
                                                         </div>
                                                     </div>
                                                     <div className="row">
