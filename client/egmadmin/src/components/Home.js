@@ -20,7 +20,7 @@ class Home extends Component {
         this.state = {
             AllProduct_Panel: false,
             Show_FullRowUpdateModal: false,
-            ShowMainUpdateInput: true,
+            ShowMainUpdateInput: false,
             ShowKeyFeatureContent: false,
             ShowPrimaryFeatureContent: false,
             EnableSaveBtnInModal: true,
@@ -100,12 +100,6 @@ class Home extends Component {
         if (e._id !== undefined || e._id !== null) {
             Array.prototype.push.apply(this.KeyFeatureArr, e.KeyFeatures)
             Array.prototype.push.apply(this.PrimaryFeatureArr, e.PrimaryFeatures)
-            console.log(e._id)
-            console.log(e)
-            console.log(this.KeyFeatureArr)
-            console.log(this.PrimaryFeatureArr)
-            console.log(e.KeyFeatures)
-            console.log(e.PrimaryFeatures)
         }
         this.setState({
             Show_FullRowUpdateModal: true,
@@ -133,7 +127,6 @@ class Home extends Component {
         this.setState({
             tableData: tempTableData
         })
-        console.log(this.state.tableData)
         axios.post('http://18.212.139.83:2020/product/admin-add-product-single', e).then(response => {
         })
     }
@@ -228,6 +221,7 @@ class Home extends Component {
             _id: document.getElementById('PID') !== null ? document.getElementById('PID').value : null,
             name: document.getElementById('PFN').value,
             brand: document.getElementById('BOP').value,
+            wrty: document.getElementById('WRTY').value,
             image: document.getElementById('URI').value,
             price: document.getElementById('PRC').value,
             mrp: document.getElementById('MRP').value,
@@ -255,6 +249,7 @@ class Home extends Component {
             _id: document.getElementById('PID') !== null ? document.getElementById('PID').value : null,
             name: document.getElementById('PFN').value,
             brand: document.getElementById('BOP').value,
+            wrty: document.getElementById('WRTY').value,
             image: document.getElementById('URI').value,
             price: document.getElementById('PRC').value,
             mrp: document.getElementById('MRP').value,
@@ -381,13 +376,10 @@ class Home extends Component {
             tableData: tempTableData
         })
         if (this.v_temp[0]._id !== "") {
-            console.log('updating data')
-            console.log(this.v_temp[0])
             axios.post('http://18.212.139.83:2020/product/admin-update-product-single', this.v_temp[0]).then(response => {
                 this.UpdateData.newData = []
             })
         } else {
-            console.log('saving data')
             axios.post('http://18.212.139.83:2020/product/admin-add-product-single', this.v_temp[0]).then(response => {
             }).then(alert("data Saved"))
         }
@@ -412,10 +404,11 @@ class Home extends Component {
                                                     <input type="text" className="form-control" id="BOP" placeholder="Brand of Product"></input>
                                                     <input type="text" className="form-control" id="PRC" placeholder="Price"></input>
                                                     <input type="text" className="form-control" id="MRP" placeholder="MRP"></input>
+                                                    <input type="number" className="form-control" id="STK" placeholder="Stock"></input>
                                                     <input type="number" className="form-control" id="RDL" placeholder="Return Day Limit"></input>
                                                 </div>
                                                 <div className="col-6 Full-edit-inputs">
-                                                    <input type="number" className="form-control" id="STK" placeholder="Stock"></input>
+                                                    <input type="number" className="form-control" id="WRTY" placeholder="Warranty Period"></input>
                                                     <input type="text" className="form-control" id="TAGS" placeholder="Tags"></input>
                                                     <center><h6 className="FeatureTag">Features</h6></center>
                                                     <div className="row">
@@ -453,6 +446,20 @@ class Home extends Component {
                                                                 </div>
                                                         }
                                                     </div>
+                                                    {/* <div className="row Other-Chk">
+                                                        <div className="col-12 d-flex justify-content-center align-items-center">
+                                                            <center><h6 className="FeatureTag">Other</h6></center>
+                                                        </div>
+                                                        <div className="col-4 Warranty-Chk">
+                                                            <input type="checkbox" className="form-control"></input> Warranty
+                                                        </div>
+                                                        <div className="col-4 Cod-Chk">
+                                                            <input type="checkbox" className="form-control"></input> COD
+                                                        </div>
+                                                        <div className="col-4 Return-Chk">
+                                                            <input type="checkbox" className="form-control"></input> Return
+                                                        </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         </div>
