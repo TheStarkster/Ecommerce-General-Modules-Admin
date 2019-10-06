@@ -131,6 +131,7 @@ class Home extends Component {
         })
     }
     PushUpdatedTableData(newData) {
+        console.log(newData)
         axios.post('http://18.212.139.83:2020/product/admin-update-product-single', newData).then(response => {
         })
     }
