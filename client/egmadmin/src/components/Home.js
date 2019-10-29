@@ -168,7 +168,7 @@ class Home extends Component {
     // }
 
     RenderAllProductPanel() {
-        axios.get('http://localhost:2020/product/admin-fetch-product').then(response => {
+        axios.get('http://18.212.139.83/:2020/product/admin-fetch-product').then(response => {
             this.setState({
                 AllProduct_Panel: true,
                 tableData: [...response.data]
