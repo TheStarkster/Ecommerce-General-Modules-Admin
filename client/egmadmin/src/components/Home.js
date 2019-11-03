@@ -8,6 +8,7 @@ import LaunchIcon from '@material-ui/icons/Launch';
 import MaterialTable from 'material-table';
 import React, { Component } from 'react'
 import axios from 'axios'
+import Promocode from './promocode'
 import './dist/styles/home.css'
 import $ from 'jquery'
 import './dist/styles/Sidebar.css'
@@ -19,6 +20,7 @@ class Home extends Component {
         super(props)
         this.state = {
             AllProduct_Panel: false,
+            PromocodePanel: false,
             Show_FullRowUpdateModal: false,
             ShowMainUpdateInput: false,
             ShowKeyFeatureContent: false,
@@ -58,6 +60,7 @@ class Home extends Component {
         this.v_temp = []
         this.PrimaryFeatures = []
         this.RenderAllProductPanel = this.RenderAllProductPanel.bind(this)
+        this.RenderPromocodePanel = this.RenderPromocodePanel.bind(this)
         this.PushDeletedTableData = this.PushDeletedTableData.bind(this)
         this.PushUpdatedTableData = this.PushUpdatedTableData.bind(this)
         this.PushAddedTableData = this.PushAddedTableData.bind(this)
@@ -94,6 +97,12 @@ class Home extends Component {
             }
 
         }
+    }
+    RenderPromocodePanel(){
+        this.setState({
+            AllProduct_Panel:false,
+            PromocodePanel:true
+        })
     }
     FullEdit(e) {
         this.FullUpdateRowData.data.push(e)
@@ -170,6 +179,7 @@ class Home extends Component {
     RenderAllProductPanel() {
         axios.get('http://18.212.139.83:2020/product/admin-fetch-product').then(response => {
             this.setState({
+                PromocodePanel:false,
                 AllProduct_Panel: true,
                 tableData: [...response.data]
             })
@@ -575,7 +585,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                    <CustomExpansionPanel trigger={this.RenderAllProductPanel} />
+                    <CustomExpansionPanel trigger={this.RenderAllProductPanel} triggerPromocode={this.RenderPromocodePanel} />
                 </div>
                 <div className="w-full">
                     {this.state.AllProduct_Panel ? <MaterialTableCustom
@@ -588,6 +598,10 @@ class Home extends Component {
                         SaveChanges={this.SaveChanges}
                     />
                         : null}
+                    {this.state.PromocodePanel ?
+                        <Promocode></Promocode>
+                        : null
+                    }
                 </div>
             </div>
         )
@@ -631,9 +645,11 @@ function CustomExpansionPanel(props) {
                             <img src={require('./assets/icons/icons8-shipping-container-24.png')} alt="Multiple Products" />
                             Add Multiple Products
                         </li>
-                        <li>
-                            <img src={require('./assets/icons/icons8-stacking-24.png')} alt="Stock Details" />
-                            Stock Detail
+                        <li onClick={() => {
+                            props.triggerPromocode()
+                        }}>
+                            <img src={require('./assets/icons/icons8-voucher-30.png')} alt="Promocodes" />
+                            Promocode
                         </li>
                     </ul>
                 </ExpansionPanelDetails>
