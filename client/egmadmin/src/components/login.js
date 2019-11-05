@@ -25,9 +25,9 @@ class LoginPanel extends Component {
             .then(result => {
                 if (result.data.message === "User Found!") {
                     this.props.history.push({
-                        pathname:'/home',
-                        state:{
-                            details:result.data
+                        pathname: '/home',
+                        state: {
+                            details: result.data
                         }
                     })
                 }
@@ -44,37 +44,35 @@ class LoginPanel extends Component {
     render() {
         return (
             <div className="bg">
-                <form onSubmit={this.SubmitHandler} method="POST">
-                    <center>
-                        <Card style={{ width: '20rem' }} className="PanelCard">
-                            <Card.Body>
-                                <Card.Title>Team Login</Card.Title>
-                                <Dropdown>
-                                    <DropdownButton title={this.state.DropDownTitle}>
-                                        <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Super-Admin" })}>Super-Admin</DropdownItem>
-                                        {/* <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Admin" })}>Admin</DropdownItem> */}
-                                        {/* <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Executive" })}>Executive</DropdownItem> */}
-                                        <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Developer" })}>Developer</DropdownItem>
-                                    </DropdownButton>
-                                </Dropdown>
-                                {
-                                    this.state.Error ?
-                                        <Alert variant="danger">
-                                            This is a alert—check it out!
+                <center>
+                    <Card style={{ width: '20rem' }} className="PanelCard">
+                        <Card.Body>
+                            <Card.Title>Team Login</Card.Title>
+                            <Dropdown>
+                                <DropdownButton title={this.state.DropDownTitle}>
+                                    <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Super-Admin" })}>Super-Admin</DropdownItem>
+                                    {/* <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Admin" })}>Admin</DropdownItem> */}
+                                    {/* <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Executive" })}>Executive</DropdownItem> */}
+                                    <DropdownItem onSelect={() => this.setState({ DropDownTitle: "Developer" })}>Developer</DropdownItem>
+                                </DropdownButton>
+                            </Dropdown>
+                            {
+                                this.state.Error ?
+                                    <Alert variant="danger">
+                                        This is a alert—check it out!
                                         </Alert>
-                                        :
-                                        null
-                                }
-                                <Card.Text>
-                                    <input type="email" className="form-control Panelinput" id="email" name="txtemail" placeholder="email@example.com" onChange={this.EmailHandler} />
-                                    <input type="password" className="form-control Panelinput" id="pass" name="txtpassword" placeholder="Password" onChange={this.PasswordHandler} />
-                                </Card.Text>
-                                <Button variant="primary" className="Panelbutton" type="submit">Log In</Button>
-                            </Card.Body>
-                        </Card>
-                    </center>
-                </form>
-            </div >
+                                    :
+                                    null
+                            }
+                            <Card.Text>
+                                <input type="email" className="form-control Panelinput" id="email" name="txtemail" placeholder="email@example.com" onChange={this.EmailHandler} />
+                                <input type="password" className="form-control Panelinput" id="pass" name="txtpassword" placeholder="Password" onChange={this.PasswordHandler} />
+                            </Card.Text>
+                            <Button variant="primary" onClick={this.SubmitHandler} className="Panelbutton" type="submit">Log In</Button>
+                        </Card.Body>
+                    </Card>
+                </center>
+            </div>
         )
     }
 }
