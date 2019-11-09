@@ -676,7 +676,7 @@ function MaterialTableCustom(props) {
             { title: 'Image Uri', field: 'image' },
             { title: 'Stock', field: 'stock', type: 'numeric' },
             { title: 'Added By', field: 'CreatedBy' },
-            { title: 'id', field: '_id', hidden: true },
+            { title: 'id', field: '_id' },
         ],
         data: props.data
     });

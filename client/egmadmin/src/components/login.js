@@ -15,8 +15,7 @@ class LoginPanel extends Component {
         }
     }
 
-    SubmitHandler = (event) => {
-        event.preventDefault();
+    SubmitHandler = () => {
         axios.post("http://18.212.139.83:2020/user/login", {
             email: this.state.email,
             pass: this.state.pass,
@@ -68,7 +67,7 @@ class LoginPanel extends Component {
                                 <input type="email" className="form-control Panelinput" id="email" name="txtemail" placeholder="email@example.com" onChange={this.EmailHandler} />
                                 <input type="password" className="form-control Panelinput" id="pass" name="txtpassword" placeholder="Password" onChange={this.PasswordHandler} />
                             </Card.Text>
-                            <Button variant="primary" onClick={this.SubmitHandler} className="Panelbutton" type="submit">Log In</Button>
+                            <Button variant="primary" onClick={() => this.SubmitHandler()} className="Panelbutton" type="submit">Log In</Button>
                         </Card.Body>
                     </Card>
                 </center>

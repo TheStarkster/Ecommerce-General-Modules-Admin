@@ -2,24 +2,26 @@ import React from 'react';
 import MaterialTable from 'material-table';
 import Switch from '@material-ui/core/Switch';
 import axios from 'axios'
+import zIndex from '@material-ui/core/styles/zIndex';
 
 export default function Promocode() {
     const [state, setState] = React.useState({
         data: [],
+        ProductLookup:{}
     })
+    React.useEffect(() => {
+        axios.post('http://18.212.139.83:2020/load-promo')
+                    .then(response => {
+                        setState({
+                            data: [...response.data]
+                        })
+                    })
+    },[])
     const ChangeState = (params) => {
         state.data.find(x => x._id === params).status = state.data.find(x => x._id === params).status === "active" ? "Inactive" : "active"
         setState({
             data: state.data
         })
-    }
-    if (state.data.length === 0) {
-        axios.post('http://18.212.139.83:2020/load-promo')
-            .then(response => {
-                setState({
-                    data: [...response.data]
-                })
-            })
     }
     return (
         <MaterialTable
@@ -28,7 +30,16 @@ export default function Promocode() {
             columns={[
                 { title: 'Created For', field: 'createdfor' },
                 { title: 'Code', field: 'code' },
-                { title: 'discount', field: 'discount' },
+                { title: 'Discount', field: 'discount' },
+                {
+                    title: 'Type', field: 'type', lookup: {
+                        34: 'Product',
+                        63: 'Checkout'
+                    }
+                },
+                {
+                    title:'Product ID',field:'product',
+                },
                 {
                     title: 'Status',
                     field: 'status',
@@ -45,27 +56,29 @@ export default function Promocode() {
                     new Promise(resolve => {
                         setTimeout(() => {
                             resolve();
-                            setState(prevState => {
-                                const data = [...prevState.data];
-                                console.log(newData.code)
-                                if (newData.code.length === 12) {
-                                    axios.post('http://18.212.139.83:2020/create-promo', {
-                                        code: newData.code,
-                                        createdfor: newData.createdfor,
-                                        discount: newData.discount
-                                    })
-                                        .then(response => {
-                                            if (response.data.message === "Already Exists") {
-                                                alert("That Code Already Exists, Try With a different one!")
-                                            } else {
+                            if (newData.code.length === 12) {
+                                axios.post('http://18.212.139.83:2020/create-promo', {
+                                    code: newData.code,
+                                    createdfor: newData.createdfor,
+                                    discount: newData.discount,
+                                    type: newData.type,
+                                    product:newData.product
+                                })
+                                    .then(response => {
+                                        if (response.data.message === "Already Exists") {
+                                            alert("That Code Already Exists, Try With a different one!")
+                                        } else {
+                                            setState(prevState => {
+                                                const data = [...prevState.data];
                                                 data.push(newData)
-                                            }
-                                        })
-                                } else {
-                                    alert("Please Set Length of Code Equals 12")
-                                }
-                                return { ...prevState, data }
-                            });
+                                                return { ...prevState, data }
+                                            })
+                                        }
+                                    })
+                            } else {
+                                alert("Please Set Length of Code Equals 12")
+                            }
+
                         }, 600);
                     }),
                 onRowUpdate: (newData, oldData) =>
@@ -73,11 +86,14 @@ export default function Promocode() {
                         setTimeout(() => {
                             resolve();
                             if (oldData) {
+                                console.log(newData)
                                 axios.post('http://18.212.139.83:2020/update-promo', {
                                     id: newData._id,
                                     code: newData.code,
                                     createdfor: newData.createdfor,
-                                    discount: newData.discount
+                                    discount: newData.discount,
+                                    type: newData.type,
+                                    product:newData.product
                                 })
                                     .then(response => {
                                         if (response.data.message === "Updated") {
@@ -115,7 +131,6 @@ export default function Promocode() {
 }
 
 function Switches(props) {
-    console.log(props)
     const [state, setState] = React.useState({
         checkedB: props.data === undefined ? true : props.data.status === "active" ? true : false,
     });
